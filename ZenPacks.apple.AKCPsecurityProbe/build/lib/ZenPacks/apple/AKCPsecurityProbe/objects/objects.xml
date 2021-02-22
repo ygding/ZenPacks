@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<objects>
+<!-- ('', 'zport', 'dmd', 'Events', 'AKCPsecurityProbe') -->
+<object id='/zport/dmd/Events/AKCPsecurityProbe' module='Products.ZenEvents.EventClass' class='EventClass'>
+<property id='zendoc' type='string'>
+AKCPsecurityProbe event classes
+</property>
+<property type="string" id="description" mode="w" >
+AKCPsecurityProbe event classes
+</property>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+</object>
+</objects>

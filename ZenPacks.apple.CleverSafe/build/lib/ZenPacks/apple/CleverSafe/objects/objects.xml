@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<objects>
+<!-- ('', 'zport', 'dmd', 'Events', 'CleverSafe') -->
+<object id='/zport/dmd/Events/CleverSafe' module='Products.ZenEvents.EventClass' class='EventClass'>
+<property id='zendoc' type='string'>
+CleverSafe event classes
+</property>
+<property type="string" id="description" mode="w" >
+CleverSafe event classes
+</property>
+<property type="text" id="transform" mode="w" >
+if "to ONLINE" in evt.summary:
+  evt.severity=0
+#elif "from ONLINE to OFFLINE" in evt.summary:
+#  evt.severity=4 
+elif "Value changed from 1 to 0" in evt.summary:
+  evt.severity=0
+</property>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<tomanycont id='instances'>
+<object id='csTrapDeviceConsistencyError' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapDeviceConsistencyError
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapDeviceConsistencyError
+</property>
+</object>
+<object id='csTrapDeviceConsistencyOk' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapDeviceConsistencyOk
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapDeviceConsistencyOk
+</property>
+</object>
+<object id='csTrapDeviceReboot' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapDeviceReboot
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapDeviceReboot
+</property>
+</object>
+<object id='csTrapDeviceStartup' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapDeviceStartup
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapDeviceStartup
+</property>
+</object>
+<object id='csTrapEvents.296' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapEvents.296
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapEvents.296
+</property>
+</object>
+<object id='csTrapFailedDrivesAtErrorThreshold' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapFailedDrivesAtErrorThreshold
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapFailedDrivesAtErrorThreshold
+</property>
+</object>
+<object id='csTrapFailedDrivesBelowErrorThreshold' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapFailedDrivesBelowErrorThreshold
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapFailedDrivesBelowErrorThreshold
+</property>
+</object>
+<object id='csTrapForceTerminationComplete' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapForceTerminationComplete
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapForceTerminationComplete
+</property>
+</object>
+<object id='csTrapProcessNotRunning' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapProcessNotRunning
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapProcessNotRunning
+</property>
+</object>
+<object id='csTrapProcessRunningCorrectly' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapProcessRunningCorrectly
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapProcessRunningCorrectly
+</property>
+</object>
+<object id='csTrapRebuilderAgentNoLongerHung' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapRebuilderAgentNoLongerHung
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapRebuilderAgentNoLongerHung
+</property>
+</object>
+<object id='csTrapUpgradeInitiated' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapUpgradeInitiated
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapUpgradeInitiated
+</property>
+</object>
+<object id='csTrapUpgradeStopping' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapUpgradeStopping
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapUpgradeStopping
+</property>
+</object>
+<object id='csTrapUpgradeSuccessful' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapUpgradeSuccessful
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapUpgradeSuccessful
+</property>
+</object>
+<object id='csTrapZombieStateSlicestor' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapZombieStateSlicestor
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapZombieStateSlicestor
+</property>
+</object>
+<object id='csTrapZombieStateSlicestorOk' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="bool" id="transformEnabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+csTrapZombieStateSlicestorOk
+</property>
+<property type="int" id="sequence" mode="w" >
+1001
+</property>
+<property type="string" id="example" mode="w" >
+snmp trap csTrapZombieStateSlicestorOk
+</property>
+</object>
+</tomanycont>
+</object>
+</objects>

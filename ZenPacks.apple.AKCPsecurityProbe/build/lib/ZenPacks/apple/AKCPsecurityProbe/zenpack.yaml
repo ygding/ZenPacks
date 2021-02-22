@@ -1,0 +1,437 @@
+name: ZenPacks.apple.AKCPsecurityProbe
+
+device_classes:
+  /Facilities/AKCPsecurityProbe:
+    zProperties:
+      zSnmpCommunity: MQM
+      zSnmpCollectionInterval: 100
+      zPythonClass: ZenPacks.apple.AKCPsecurityProbe.AKCPsecurityProbeDevice
+      zSnmpMonitorIgnore: false
+      zCollectorPlugins:
+        - apple.snmp.AKCPTemperatureSensor
+        - apple.snmp.AKCPHumiditySensor
+        - apple.snmp.AKCPACvoltage
+        - apple.snmp.AKCPWaterRope
+        - apple.snmp.AKCPWetContact
+        - apple.snmp.AKCPWaterDetector
+        - apple.snmp.AKCPAirflowSensor
+        - apple.snmp.AKCPSecuritySensor
+        - apple.snmp.AKCPDeviceMap
+        - zenoss.snmp.NewDeviceMap
+        - zenoss.snmp.DeviceMap
+        - zenoss.snmp.InterfaceMap
+      zDeviceTemplates:
+        - TemperatureSensor
+        - HumiditySensor
+        - ACVoltageSensor
+        - DryContactSensor
+        - WaterRopeSensor
+        - WaterDetectorSensor
+        - AirflowSensor
+        - SecuritySensor
+
+    templates:
+      SecuritySensor:
+        description: AKCPsecurityProbe Security Sensor
+        datasources:
+          SecuritySensorValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.10.1.6
+            datapoints:
+              ACVoltageStatusValue: GAUGE
+        thresholds:
+          Opened:
+            dsnames: [SecuritySensorValue_SecuritySensorValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            maxval: 2.5
+            minval: 1.5
+          Closed:
+            dsnames: [SecuritySensorValue_SecuritySensorValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 0
+            minval: 2.5
+            maxval: 1.5
+
+      TemperatureSensor:
+        description: AKCPsecurityProbe Temperature Status
+        datasources:
+          TempNow:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.2.1.20
+            datapoints:
+              TempNow: GAUGE
+        thresholds:
+          CriticalTemperature:
+            dsnames: [TempNow_TempNow]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            minval: 140
+            maxval: 320
+          WarningTemperature:
+              dsnames: [TempNow_TempNow]
+              eventClass: /AKCPsecurityProbe
+              severity: 3
+              minval: 180
+              maxval: 270
+          NormalTemperature:
+              dsnames: [TempNow_TempNow]
+              eventClass: /AKCPsecurityProbe
+              severity: 0
+              minval: 270
+              maxval: 180
+        graphs:
+          Temperature:
+            units: Degree C
+            graphpoints:
+              Temperature:
+                dpName: TempNow_TempNow
+                format: "%7.2lf"
+                rpn: 0.1,*
+
+      HumiditySensor:
+        description: AKCPsecurityProbe Humidity Status
+        datasources:
+          HumidityNowValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.3.1.4
+            datapoints:
+              HumidityNowValue: GAUGE
+        thresholds:
+          CriticalHumidity:
+            dsnames: [HumidityNowValue_HumidityNowValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            minval: 8
+            maxval: 80
+          WarningHumidity:
+              dsnames: [HumidityNowValue_HumidityNowValue]
+              eventClass: /AKCPsecurityProbe
+              severity: 3
+              minval: 20
+              maxval: 75
+          NormalHumidity:
+              dsnames: [HumidityNowValue_HumidityNowValue]
+              eventClass: /AKCPsecurityProbe
+              severity: 0
+              minval: 75
+              maxval: 20
+        graphs:
+          Humidity:
+            units: percent
+            miny: 0
+            maxy: 100
+            graphpoints:
+              Humidity:
+                dpName: HumidityNowValue_HumidityNowValue
+                format: "%5.0lf%%"
+
+      ACVoltageSensor:
+        description: AKCPsecurityProbe AC Voltage
+        datasources:
+          ACVoltageStatusValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.13.1.6
+            datapoints:
+              ACVoltageStatusValue: GAUGE
+        thresholds:
+          ACVoltageAbnormal:
+            dsnames: [ACVoltageStatusValue_ACVoltageStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            maxval: 2.5
+            minval: 1.5
+          NormalACVoltage:
+            dsnames: [ACVoltageStatusValue_ACVoltageStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 0
+            minval: 2.5
+            maxval: 1.5
+
+      DryContactSensor:
+        description: AKCPsecurityProbe Dry Contact
+        datasources:
+          DryContactStatusValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.4.1.6
+            datapoints:
+              DryContactStatusValue: GAUGE
+        thresholds:
+          DryContactAbnormal:
+            dsnames: [DryContactStatusValue_DryContactStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            maxval: 2.5
+            minval: 5
+          noStatus:
+            dsnames: [DryContactStatusValue_DryContactStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            minval: 1.5
+          SensorInfo:
+            dsnames: [DryContactStatusValue_DryContactStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            maxval: 7.5
+          SensorError:
+            dsnames: [DryContactStatusValue_DryContactStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            minval: 7.5
+            maxval: 6.5
+          NormalDryContact:
+            dsnames: [DryContactStatusValue_DryContactStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 0
+            minval: 2.5
+            maxval: 1.5
+
+      WaterRopeSensor:
+        description: AKCPsecurityProbe Liquid Sensor (Water Rope)
+        datasources:
+          WaterRopeStatusValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.21.1.6
+            datapoints:
+              WaterRopeStatusValue: GAUGE
+        thresholds:
+          WaterRopeAbnormal:
+            dsnames: [WaterRopeStatusValue_WaterRopeStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            maxval: 2.5
+            minval: 6.5
+          SensorError:
+            dsnames: [WaterRopeStatusValue_WaterRopeStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            maxval: 6.5
+          noStatus:
+            dsnames: [WaterRopeStatusValue_WaterRopeStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            minval: 1.5
+          NormalWaterRope:
+            dsnames: [WaterRopeStatusValue_WaterRopeStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 0
+            maxval: 1.5
+            minval: 2.5
+
+      AirflowSensor:
+        description: AKCPsecurityProbe Airflow Sensor
+        datasources:
+          AirflowValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.7.1.4
+            datapoints:
+              AirflowValue: GAUGE
+        thresholds:
+          AirflowAbnormal:
+            dsnames: [AirflowValue_AirflowValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            maxval: 90
+          NormalAirflow:
+            dsnames: [AirflowValue_AirflowValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 0
+            minval: 90
+        graphs:
+          Airflow:
+            units: percent
+            miny: 0
+            maxy: 100
+            graphpoints:
+              Humidity:
+                dpName: AirflowValue_AirflowValue
+                format: "%5.0lf%%"
+
+      WaterDetectorSensor:
+        description: AKCPsecurityProbe Liquid Sensor (Water Detector)
+        datasources:
+          WaterDetectorStatusValue:
+            type: SNMP
+            oid: 1.3.6.1.4.1.3854.2.3.9.1.6
+            datapoints:
+              WaterDetectorStatusValue: GAUGE
+        thresholds:
+          WaterDetectorAbnormal:
+            dsnames: [WaterDetectorStatusValue_WaterDetectorStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 5
+            maxval: 2.5
+            minval: 6.5
+          SensorError:
+            dsnames: [WaterDetectorStatusValue_WaterDetectorStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            maxval: 6.5
+          noStatus:
+            dsnames: [WaterDetectorStatusValue_WaterDetectorStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 4
+            minval: 1.5
+          NormalWaterDetector:
+            dsnames: [WaterDetectorStatusValue_WaterDetectorStatusValue]
+            eventClass: /AKCPsecurityProbe
+            severity: 0
+            maxval: 1.5
+            minval: 2.5
+
+classes:
+  AKCPsecurityProbeDevice:
+    base: [zenpacklib.Device]
+    label: AKCPsecurityProbe
+
+  AKCPSecuritySensor:
+    base: [zenpacklib.Component]
+    label: Security Sensor
+    properties:
+      SecuritySensorStatus:
+        label: Status
+      SecuritySensorOnline:
+        label: Online
+      SensorPort:
+        label: PortID
+
+  AKCPTemperatureSensor:
+    base: [zenpacklib.Component]
+    label: Temperature Sensor
+    properties:
+      SensorTempDegree:
+        label: Temperature
+      SensorTempDegreeType:
+        label: Degree
+      SensorTempStatus:
+        label: Status
+      SensorTempOnline:
+        label: Online
+      SensorPort:
+        label: PortID
+      SensorTempLowCritical:
+        label: Low Critical
+        label_width: 20
+      SensorTempLowWarning:
+        label: Low Warning
+        label_width: 20
+      SensorTempHighWarning:
+        label: High Warning
+        label_width: 20
+      SensorTempHighCritical:
+        label: High Critical
+        label_width: 20
+
+  AKCPHumiditySensor:
+    base: [zenpacklib.Component]
+    label: Humidity Sensor
+    properties:
+      SensorHumidityPercent:
+        label: Humidity(%)
+      SensorHumidityStatus:
+        label: Status
+      SensorHumidityOnline:
+        label: Online
+      SensorPort:
+        label: PortID
+      SensorHumidityLowCritical:
+        label: Low Critical(%)
+        label_width: 20
+      SensorHumidityLowWarning:
+        label: Low Warning(%)
+        label_width: 20
+      SensorHumidityHighWarning:
+        label: High Warning(%)
+        label_width: 20
+      SensorHumidityHighCritical:
+        label: High Critical(%)
+        label_width: 20
+
+  AKCPACvoltage:
+    base: [zenpacklib.Component]
+    label: AC Voltage Sensor
+    properties:
+      SensorACvoltageStatus:
+        label: Status
+      SensorACvoltageOnline:
+        label: Online
+      SensorPort:
+        label: PortID
+
+  AKCPWaterRope:
+    base: [zenpacklib.Component]
+    label: Water Rope Sensor
+    properties:
+      SensorWaterRopeLeakLocation:
+        label: Cable Length
+      SensorWaterRopeUnit:
+        label: Unit
+      SensorWaterRopeRaw:
+        label: Raw Analog Reading
+      SensorWaterRopeStatus:
+        label: Status
+      SensorWaterRopeOnline:
+        label: Online
+
+  AKCPWetContact:
+    base: [zenpacklib.Component]
+    label: Dry Contact Sensor
+    properties:
+      SensorDryContactStatus:
+        label: Status
+      SensorDryContactDirection:
+        label: Direction
+      SensorDryContactOnline:
+        label: Online
+
+  AKCPWaterDetector:
+      base: [zenpacklib.Component]
+      label: Water Detector Sensor
+      properties:
+        SensorWaterDetectorStatus:
+          label: Status
+        SensorWaterDetectorOnline:
+          label: Online
+        SensorPort:
+          label: PortID
+
+  AKCPAirflowSensor:
+      base: [zenpacklib.Component]
+      label: Airflow Sensor
+      properties:
+        SensorAirflowValue:
+          label: Value
+        SensorAirflowStatus:
+          label: Status
+        SensorAirflowOnline:
+          label: Online
+        SensorAirflowPort:
+          label: PortID
+        SensorAirflowLowCritical:
+          label: Low Critical
+          label_width: 20
+        SensorAirflowLowWarning:
+          label: Low Warning
+          label_width: 20
+        SensorAirflowHighWarning:
+          label: High Warning
+          label_width: 20
+        SensorAirflowHighCritical:
+          label: High Critical
+          label_width: 20
+
+
+class_relationships:
+  - AKCPsecurityProbeDevice 1:MC AKCPTemperatureSensor
+  - AKCPsecurityProbeDevice 1:MC AKCPHumiditySensor
+  - AKCPsecurityProbeDevice 1:MC AKCPACvoltage
+  - AKCPsecurityProbeDevice 1:MC AKCPWaterRope
+  - AKCPsecurityProbeDevice 1:MC AKCPWetContact
+  - AKCPsecurityProbeDevice 1:MC AKCPWaterDetector
+  - AKCPsecurityProbeDevice 1:MC AKCPAirflowSensor
+  - AKCPsecurityProbeDevice 1:MC AKCPSecuritySensor
+
+event_classes:
+  /AKCPsecurityProbe:
+    remove: false
+    description: AKCPsecurityProbe event classes

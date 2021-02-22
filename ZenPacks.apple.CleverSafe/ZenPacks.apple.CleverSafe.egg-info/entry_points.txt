@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.apple.CleverSafe = ZenPacks.apple.CleverSafe
+

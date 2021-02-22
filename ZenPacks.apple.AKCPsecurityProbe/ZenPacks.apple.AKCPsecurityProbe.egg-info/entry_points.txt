@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.apple.AKCPsecurityProbe = ZenPacks.apple.AKCPsecurityProbe
+
